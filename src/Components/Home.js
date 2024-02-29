@@ -1,5 +1,5 @@
 import React from 'react'
-import img1 from '../assets/img.jpeg'
+import img1 from '../assets/img.png'
 import '../Styles/Home.css'
 
 function Home() {
