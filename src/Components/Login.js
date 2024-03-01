@@ -202,9 +202,11 @@ const Login = (props) => {
             loginUser(isVerified.user)
         }
         else if (isVerified.data === false){
-             alert("Incorrect credentials");;
+             alert("Incorrect credentials");
+             setLoading(false)
         }else if(isVerified.message){
             alert("User not found")
+            setLoading(false)
         }
     }
 
