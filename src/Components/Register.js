@@ -62,13 +62,16 @@ function Register() {
                 })
       
             }else{
+                setLoading(false)
                 alert("Passwords do not match")
             }
       
         }else if(isUnique.count === "Email"){
+            setLoading(false)
             alert("Email already exists")
         }else if(isUnique.count === "Username"){
-            alert("Username already exists")
+            setLoading(false)
+            alert("Username taken")
         }
       }
       

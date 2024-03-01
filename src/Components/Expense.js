@@ -85,6 +85,9 @@ function Expense({ authToken }) {
 }
 function closeForm(){
     document.querySelector('.formArea').style.display = 'none'
+    document.querySelector('.formArea input[type="date"]').classList.remove('clicked')
+    document.querySelector('.formArea input[type="date"]').value = ''
+    document.getElementById('myForm') .reset()
 }
 function closeForm2(){
     document.querySelector('.formArea2').style.display = 'none'
@@ -124,6 +127,8 @@ function closeForm2(){
     .then(data =>{
         // console.log(data);
         document.querySelector('.formArea').style.display = 'none'
+        document.querySelector('.formArea input[type="date"]').classList.remove('clicked')
+        document.querySelector('.formArea input[type="date"]').value = ''
         newExp.reset()
         getDataByUser()
     })
@@ -236,6 +241,7 @@ function deleteThis(d){
     // console.log(conf);
 
     if(conf){
+      setLoading(true)
         fetch(url+'/expense/'+tarId,{
             method: "DELETE",
         })
@@ -292,6 +298,12 @@ function changeView(e){
   }
 }
 
+function removePlaceholder(e){
+  console.log("hi");
+  let tar = e.currentTarget
+
+  tar.classList.add('clicked')
+}
   
   return (
     <div className="myExpenses">
@@ -301,17 +313,17 @@ function changeView(e){
             <button type="button" onClick={closeForm}>X</button>
             <div className="form-item">
                 <label htmlFor="title">Title</label>
-                <input id="hello" type="text" name="title"  onKeyDown={keyhandle}/>
+                <input required id="hello" type="text" name="title"  onKeyDown={keyhandle}/>
             </div>
             <div className="form-item">
                 <label htmlFor="amount">Amount</label>
-                <input type="text" name="amount"  onKeyDown={keyhandle}/>
+                <input required type="text" name="amount"  onKeyDown={keyhandle}/>
             </div>
             <div className="form-item">
                 <label htmlFor="date">Date</label>
-                <input type="date" name="date" placeholder="MM/DD/YYYY"  onKeyDown={keyhandle}/>
+                <input required type="date" name="date" placeholder="MM/DD/YYYY" onTouchStart={removePlaceholder} onKeyDown={keyhandle}/>
             </div>
-            <input type="submit" value="Add Expense" />
+            <input type="submit" value="Add Expense"/>
         </form>
     </div>
 
