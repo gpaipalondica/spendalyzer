@@ -225,6 +225,11 @@ const Login = (props) => {
       letShowPassLogin(!showPassLogin)
     }
 
+    let nav2 = useNavigate()
+    function navToReg(){
+      nav2('/register')
+    }
+
   return (
     <div className='login'>
       {loading && <Loader />}
@@ -248,6 +253,7 @@ const Login = (props) => {
               <button type="submit" className="btn btn-primary">Login</button>
           </form>
         </div>
+        <p className='bottomtext'>Not a member? <span onClick={navToReg}>Register Now</span></p>
     </div>
   )
 }

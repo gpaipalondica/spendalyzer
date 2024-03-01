@@ -136,6 +136,11 @@ function Register() {
         }
     }
 
+    let nav2 = useNavigate()
+    function navToLog(){
+        nav2('/login')
+    }
+
 
   return (
     <div className='register'>
@@ -173,6 +178,7 @@ function Register() {
             <button type="submit" className="btn btn-primary">Register</button>
         </form>
     </div>
+    <p className='bottomtext'>Already a member? <span onClick={navToLog}>Login Now</span></p>
     </div>
   )
 }
