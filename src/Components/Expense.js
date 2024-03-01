@@ -87,7 +87,7 @@ function closeForm(){
     document.querySelector('.formArea').style.display = 'none'
     document.querySelector('.formArea input[type="date"]').classList.remove('clicked')
     document.querySelector('.formArea input[type="date"]').value = ''
-    document.getElementById('myForm') .reset()
+    document.getElementById('myForm').reset()
 }
 function closeForm2(){
     document.querySelector('.formArea2').style.display = 'none'
@@ -108,33 +108,40 @@ function closeForm2(){
 
     setLoading(true)
     
-    let data = {
-        "title": val.title,
-        "amount": val.amount,
-        "date" : val.date,
-        "username": username
-    }
-    // console.log(data);
+    if (isNaN(val.amount) || val.amount.trim() === '') {
+      alert('Amount must be a number');
+        setLoading(false)
+    } else {
 
-    fetch(url+'/expense',{
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(data =>{
-        // console.log(data);
-        document.querySelector('.formArea').style.display = 'none'
-        document.querySelector('.formArea input[type="date"]').classList.remove('clicked')
-        document.querySelector('.formArea input[type="date"]').value = ''
-        newExp.reset()
-        getDataByUser()
-    })
-    .catch(error => {
-        console.error("POST Error", error)
-    });
+      let data = {
+          "title": val.title,
+          "amount": val.amount,
+          "date" : val.date,
+          "username": username
+      }
+      // console.log(data);
+    
+  
+      fetch(url+'/expense',{
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+      })
+      .then(response => response.json())
+      .then(data =>{
+          // console.log(data);
+          document.querySelector('.formArea').style.display = 'none'
+          document.querySelector('.formArea input[type="date"]').classList.remove('clicked')
+          document.querySelector('.formArea input[type="date"]').value = ''
+          newExp.reset()
+          getDataByUser()
+      })
+      .catch(error => {
+          console.error("POST Error", error)
+      });
+    }
 }
 
 
@@ -186,6 +193,7 @@ function closeForm2(){
 
 function editSubmit(e) {
     e.preventDefault()
+    
     let newExp = document.getElementById('myForm2') 
     setLoading(true)
     let val={}
@@ -204,6 +212,10 @@ function editSubmit(e) {
     }
     // console.log(data);
 
+    if (isNaN(val.amount) || val.amount.trim() === '') {
+      alert('Amount must be a number');
+        setLoading(false)
+    } else {
     fetch(url+'/expense/'+id,{
         method: "PUT",
         headers: {
@@ -221,6 +233,7 @@ function editSubmit(e) {
     .catch(error => {
         console.log("UPDATE ERROR", error);
     })
+    }
 }
 
 function deleteThis(d){
@@ -290,10 +303,14 @@ function changeView(e){
 
   if(id === 'graphView'){
       document.querySelector('.listings').style.display = 'none'
+      document.querySelector('.addForm').style.display = 'none'
+      document.querySelector('.refreshBtn').style.display = 'none'
       setChart(true)
     }
     else if(id === 'listView'){
       document.querySelector('.listings').style.display = 'flex'
+      document.querySelector('.addForm').style.display = 'grid'
+      document.querySelector('.refreshBtn').style.display = 'grid'
       setChart(false)
   }
 }
@@ -317,7 +334,7 @@ function removePlaceholder(e){
             </div>
             <div className="form-item">
                 <label htmlFor="amount">Amount</label>
-                <input required type="text" name="amount"  onKeyDown={keyhandle}/>
+                <input required type="text" name="amount" placeholder='$' onKeyDown={keyhandle}/>
             </div>
             <div className="form-item">
                 <label htmlFor="date">Date</label>
@@ -340,7 +357,7 @@ function removePlaceholder(e){
                 </div>
                 <div className="form-item">
                     <label htmlFor="amount">Amount</label>
-                    <input id="f2-amt" type="text" required name="amount" onKeyDown={keyhandle} />
+                    <input id="f2-amt" type="text" required name="amount" placeholder='$'  onKeyDown={keyhandle} />
                 </div>
                 <input type="submit" value="Modify" />
             </form>
