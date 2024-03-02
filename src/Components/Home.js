@@ -27,6 +27,7 @@ function Home() {
       {loading? <Loader/>: 
       <>
       <h1 className='home-text'>Welcome to Spendalyzer</h1>
+      <p>Keep track of your expenses</p>
       <img className='home-img' src={img1} alt="" />
       <button onClick={navLogin}>Get Started</button>
       </>
