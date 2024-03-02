@@ -24,13 +24,14 @@ button:focus{
     background: transparent;
     font-size: 18px;
     cursor: pointer;
-    color: red;
+    color: black;
     border: none;
     width: 30px;
     aspect-ratio: 1;
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 28px;
 }
 
 .expense-row{
@@ -46,6 +47,11 @@ button:focus{
     display:flex; 
     align-items:center; 
     justify-content: center;
+    gap: 20px;
+}
+
+.month-disp p{
+    font-size: 30px;
 }
 
 
@@ -389,6 +395,17 @@ input[type='submit']:hover{
     }
     .twoBtns{
         left: 0;
+    }
+    .editBtnPerMonth{
+        right: 8px;
+        font-size: 23px;
+    }
+    .month-disp{
+        padding: 0 30px;
+        gap: 10px;
+    }
+    .month-disp p{
+        font-size: 22px;
     }
     
 }

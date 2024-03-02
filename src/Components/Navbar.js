@@ -50,7 +50,7 @@ function Navbar({userData, authToken, setAuthToken, setUserData}) {
       
       
       
-      function closeNav(){
+      function closeNav(e){
         document.querySelector('.burger').classList.remove('active')
         document.querySelector('.burger').innerHTML = `<svg stroke="currentColor" fill="currentColor" strokeWidth="0" viewBox="0 0 512 512" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><path  d="M32 96v64h448V96H32zm0 128v64h448v-64H32zm0 128v64h448v-64H32z"></path></svg>`
         document.querySelector('.nav-right').style.top = '-250px'
@@ -70,14 +70,15 @@ function Navbar({userData, authToken, setAuthToken, setUserData}) {
         <div className="nav-right">
             {authToken ? (
                 <>
-                <Link onClick={closeNav} to='/expense'>Expenses</Link>
-                <Link onClick={logmeout}>Logout</Link>
+                <Link  to='/' onClick={closeNav}>Home</Link>
+                <Link  onClick={closeNav} to='/expense'>Expenses</Link>
+                <Link  onClick={logmeout}>Logout</Link>
               </>
             ) : (
                 <>
-                <Link to='/' onClick={closeNav}>Home</Link>
-                <Link to='/login' onClick={closeNav}>Login</Link>
-                <Link to='/register' onClick={closeNav}>Register</Link>
+                <Link  to='/' onClick={closeNav}>Home</Link>
+                <Link  to='/login' onClick={closeNav}>Login</Link>
+                <Link  to='/register' onClick={closeNav}>Register</Link>
                 </>
             )}
         </div>

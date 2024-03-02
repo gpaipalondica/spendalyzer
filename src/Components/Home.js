@@ -8,29 +8,42 @@ import Loader from './Loader'
 
 function Home() {
 
-  const [loading, setLoading] = useState(true)
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
-      setTimeout(() =>{
-        setLoading(false)
-      },800)
-  })
+    setIsLoaded(true);
+  }, []);
+
+  const [loggedIn, setLoggedIn] = useState(false)
+
+  useEffect(() => {
+      if(sessionStorage.getItem( "user" ) !== null){
+          setLoggedIn( true );
+      } else {
+        setLoggedIn(false)
+      }
+  },[])
 
   let nav2 = useNavigate()
 
-  function navLogin(){
-    nav2('/login')
+  function navTo(x){
+    nav2('/'+x)
   }
 
   return (
     <div className='home'>
-      {loading? <Loader/>: 
+      {isLoaded? 
       <>
       <h1 className='home-text'>Welcome to Spendalyzer</h1>
       <p>Keep track of your expenses</p>
       <img className='home-img' src={img1} alt="" />
-      <button onClick={navLogin}>Get Started</button>
+      {loggedIn ? <button onClick={() => navTo('expense')}>View My Expenses</button>
+      :  
+      <button onClick={() => navTo('login')}>Get Started</button>
+      }
       </>
+      :
+      <Loader/>
       }
     </div>
 
