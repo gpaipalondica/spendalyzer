@@ -71,8 +71,8 @@ const Login = (props) => {
                   // console.log("PU",passedUser);
                   let count = 0
                   for(let user in allUsers){
-                    let au = (allUsers[user].username).toLowerCase()
-                    let pu = (passedUser.username).toLowerCase()
+                    let au = allUsers[user].username
+                    let pu = passedUser.username
                       if(au === pu || allUsers[user].email === pu){
                           // console.log("USERNAME matched")
                           count++;
